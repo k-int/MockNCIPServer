@@ -15,7 +15,7 @@ buildscript {
 // https://github.com/palantir/gradle-docker/releases
 
 version "0.1"
-group "mockncipserver"
+group "k-int"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -105,4 +105,13 @@ tasks.withType(Test) {
 assets {
     minifyJs = true
     minifyCss = true
+}
+
+// ./gradlew build docker
+docker {
+  // name 'hub.docker.com/knowint/resource-sharing-message-services:latest'
+  name 'knowint/MockNCIPServer:latest'
+  files war.archivePath
+  buildArgs(['JAR_FILE':"${war.archiveName}"])
+  dockerfile project.file('src/main/docker/Dockerfile')
 }
