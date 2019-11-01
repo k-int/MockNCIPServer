@@ -111,7 +111,7 @@ assets {
 // ./gradlew build docker
 docker {
   // name 'hub.docker.com/knowint/resource-sharing-message-services:latest'
-  name 'knowint/MockNCIPServer:latest'
+  name 'knowint/mock_ncip_server:latest'
   files war.archivePath
   buildArgs(['JAR_FILE':"${war.archiveName}"])
   dockerfile project.file('src/main/docker/Dockerfile')
