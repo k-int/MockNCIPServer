@@ -13,6 +13,7 @@ buildscript {
 
 // https://spring.io/guides/gs/spring-boot-docker/
 // https://github.com/palantir/gradle-docker/releases
+// https://gist.github.com/ianibo/636b89252430baa28320474c9b390a9a
 
 version "0.1"
 group "k-int"
