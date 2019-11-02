@@ -15,8 +15,10 @@ buildscript {
 // https://github.com/palantir/gradle-docker/releases
 // https://gist.github.com/ianibo/636b89252430baa28320474c9b390a9a
 
+// Build and tag with ./gradlew clean build docker dockerTag
+
 version "0.1"
-group "k-int"
+group "k_int"
 
 apply plugin:"eclipse"
 apply plugin:"idea"
@@ -108,11 +110,13 @@ assets {
     minifyCss = true
 }
 
-// ./gradlew build docker
 docker {
-  // name 'hub.docker.com/knowint/resource-sharing-message-services:latest'
-  name 'knowint/mock_ncip_server:latest'
+  // name 'hub.docker.com/knowledgeintegration/mock_ncip_server'
+  name 'knowledgeintegration/mock_ncip_server:v1.0'
+  tag 'latest', 'knowledgeintegration/mock_ncip_server:latest'
+  tag 'v1', 'knowledgeintegration/mock_ncip_server:v1'
   files war.archivePath
   buildArgs(['JAR_FILE':"${war.archiveName}"])
   dockerfile project.file('src/main/docker/Dockerfile')
 }
+
