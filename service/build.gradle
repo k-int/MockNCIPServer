@@ -118,5 +118,15 @@ docker {
   files war.archivePath
   buildArgs(['JAR_FILE':"${war.archiveName}"])
   dockerfile project.file('src/main/docker/Dockerfile')
+
+  // Not yet supported - PR - https://github.com/palantir/gradle-docker/pull/219
+  // login {
+  //   'hub.docker.com' {
+  //     def usr = project.hasProperty('knowintDockerHubUser') ? knowintDHUser :''
+  //     def pass = project.hasProperty('knowintDockerHubPass') ? knowintDHPass :''
+  //     username usr
+  //     password pass
+  //   }        
+  // }
 }
 
