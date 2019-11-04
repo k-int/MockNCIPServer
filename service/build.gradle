@@ -7,15 +7,8 @@ buildscript {
         classpath "org.grails.plugins:hibernate5:7.0.0"
         classpath "gradle.plugin.com.github.erdi.webdriver-binaries:webdriver-binaries-gradle-plugin:2.0"
         classpath "com.bertramlabs.plugins:asset-pipeline-gradle:3.0.10"
-        classpath 'gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.22.1'
     }
 }
-
-// https://spring.io/guides/gs/spring-boot-docker/
-// https://github.com/palantir/gradle-docker/releases
-// https://gist.github.com/ianibo/636b89252430baa28320474c9b390a9a
-
-// Build and tag with ./gradlew clean build docker dockerTag
 
 version "0.1"
 group "k_int"
@@ -27,7 +20,6 @@ apply plugin:"org.grails.grails-web"
 apply plugin:"com.github.erdi.webdriver-binaries"
 apply plugin:"org.grails.grails-gsp"
 apply plugin:"com.bertramlabs.asset-pipeline"
-apply plugin: 'com.palantir.docker'
 
 repositories {
     maven { url "https://repo.grails.org/grails/core" }
@@ -109,24 +101,3 @@ assets {
     minifyJs = true
     minifyCss = true
 }
-
-docker {
-  // name 'hub.docker.com/knowledgeintegration/mock_ncip_server'
-  name 'knowledgeintegration/mock_ncip_server:v1.0'
-  tag 'latest', 'knowledgeintegration/mock_ncip_server:latest'
-  tag 'v1', 'knowledgeintegration/mock_ncip_server:v1'
-  files war.archivePath
-  buildArgs(['JAR_FILE':"${war.archiveName}"])
-  dockerfile project.file('src/main/docker/Dockerfile')
-
-  // Not yet supported - PR - https://github.com/palantir/gradle-docker/pull/219
-  // login {
-  //   'hub.docker.com' {
-  //     def usr = project.hasProperty('knowintDockerHubUser') ? knowintDHUser :''
-  //     def pass = project.hasProperty('knowintDockerHubPass') ? knowintDHPass :''
-  //     username usr
-  //     password pass
-  //   }        
-  // }
-}
-
